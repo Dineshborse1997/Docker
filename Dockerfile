@@ -1,16 +1,17 @@
-FROM ubuntu:latest
+# Use an official Python base image
+FROM python:3.10-slim
 
-# Set the working directory in the image
+# Set working directory
 WORKDIR /app
 
-# Copy the files from the host file system to the image file system
-COPY . /app
+# Copy app.py into the container
+COPY app.py .
 
-# Install the necessary packages
-RUN apt-get update && apt-get install -y python3 python3-pip
+# Install Flask
+RUN pip install flask
 
-# Set environment variables
-ENV NAME World
+# Expose port 5000
+EXPOSE 5000
 
-# Run a command to start the application
-CMD ["python3", "app.py"]
+# Run the application
+CMD ["python", "app.py"]

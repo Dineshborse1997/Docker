@@ -1,17 +1,23 @@
-# Use an official Python base image
-FROM python:3.10-slim
+# Base image (OS)
 
-# Set working directory
+FROM python:3.9-slim
+
+# Working directory
+
 WORKDIR /app
 
-# Copy app.py into the container
-COPY app.py .
+# Copy src code to container
 
-# Install Flask
-RUN pip install flask
+COPY . .
 
-# Expose port 5000
-EXPOSE 5000
+# Run the build commands
 
-# Run the application
-CMD ["python", "app.py"]
+RUN pip install -r requirements.txt
+
+# expose port 80
+
+EXPOSE 80
+
+# serve the app / run the app (keep it running)
+
+CMD ["python","run.py"]
